@@ -23,7 +23,7 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test",
+		"test": "react-app-rewired test --coverage --watchAll=false",
 		"eject": "react-scripts eject"
 	},
 	"jest": {
@@ -37,7 +37,12 @@
 		],
 		"moduleNameMapper": {
 			"^~/(.*)": "<rootDir>/src/$1"
-		}
+		},
+		"collectCoverageFrom": [
+			"!src/index.js",
+			"!src/services/api.js"
+		],
+		"coverageDirectory": "__tests__/coverage"
 	},
 	"browserslist": {
 		"production": [

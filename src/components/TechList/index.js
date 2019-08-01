@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // import { Container } from './styles';
 
 export default function TechList() {
-	const [techs, setTechs] = useState([]);
 	const [newTech, setNewTech] = useState('');
 
-	useEffect(() => {
-		const techs = localStorage.getItem('techs');
+	const techs = useSelector(state => state.techs);
 
-		if (techs) {
-			setTechs(JSON.parse(techs));
-		}
-	}, []);
-
-	useEffect(() => {
-		localStorage.setItem('techs', JSON.stringify(techs));
-	}, [techs]);
-
+	const dispatch = useDispatch();
 	function handleAddTech() {
 		if (newTech) {
-			setTechs([...techs, newTech]);
+			dispatch({ type: 'ADD_TECH', payload: { tech: newTech } });
 		}
 		setNewTech('');
 	}
